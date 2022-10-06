@@ -5,29 +5,20 @@
 
 namespace Astroanu\C3jsPHP\Charts;
 
-/**
- * Class Line
- * @package Astroanu\C3jsPHP\Charts
- */
-class Line implements \JsonSerializable
+final class Line implements \JsonSerializable
 {
-    const STEP_TYPE_STEP = 'step';
-    const STEP_TYPE_STEP_BEFORE = 'step-before';
-    const STEP_TYPE_STEP_AFTER = 'step-after';
+    public const STEP_TYPE_STEP = 'step';
+    public const STEP_TYPE_STEP_BEFORE = 'step-before';
+    public const STEP_TYPE_STEP_AFTER = 'step-after';
 
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Set if null data point will be connected or not
      *
-     * @param bool $connect
-     *
      * @link http://c3js.org/reference.html#line-connectNull
      */
-    public function setConnectNull($connect = false)
+    public function setConnectNull(bool $connect = false): void
     {
         $this->data['connectNull'] = $connect;
     }
@@ -35,11 +26,9 @@ class Line implements \JsonSerializable
     /**
      * Change step type for step chart
      *
-     * @param string $type
-     *
      * @link http://c3js.org/reference.html#line-step_type
      */
-    public function setStepType($type = self::STEP_TYPE_STEP)
+    public function setStepType(string $type = self::STEP_TYPE_STEP): void
     {
         if (!isset($this->data['step'])) {
             $this->data['step'] = [];
@@ -48,10 +37,7 @@ class Line implements \JsonSerializable
         $this->data['step']['type'] = $type;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }

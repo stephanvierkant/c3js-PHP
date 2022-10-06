@@ -100,7 +100,6 @@ class ClassLoader
     /**
      * Registers a set of PSR-0 directories for a given prefix, either
      * appending or prepending to the ones previously set for this prefix.
-     *
      * @param string       $prefix  The prefix
      * @param array|string $paths   The PSR-0 root directories
      * @param bool         $prepend Whether to prepend the directories
@@ -145,11 +144,9 @@ class ClassLoader
     /**
      * Registers a set of PSR-4 directories for a given namespace, either
      * appending or prepending to the ones previously set for this namespace.
-     *
      * @param string       $prefix  The prefix/namespace, with trailing '\\'
      * @param array|string $paths   The PSR-0 base directories
      * @param bool         $prepend Whether to prepend the directories
-     *
      * @throws \InvalidArgumentException
      */
     public function addPsr4($prefix, $paths, $prepend = false)
@@ -193,7 +190,6 @@ class ClassLoader
     /**
      * Registers a set of PSR-0 directories for a given prefix,
      * replacing any others previously set for this prefix.
-     *
      * @param string       $prefix The prefix
      * @param array|string $paths  The PSR-0 base directories
      */
@@ -209,10 +205,8 @@ class ClassLoader
     /**
      * Registers a set of PSR-4 directories for a given namespace,
      * replacing any others previously set for this namespace.
-     *
      * @param string       $prefix The prefix/namespace, with trailing '\\'
      * @param array|string $paths  The PSR-4 base directories
-     *
      * @throws \InvalidArgumentException
      */
     public function setPsr4($prefix, $paths)
@@ -231,7 +225,6 @@ class ClassLoader
 
     /**
      * Turns on searching the include path for class files.
-     *
      * @param bool $useIncludePath
      */
     public function setUseIncludePath($useIncludePath)
@@ -242,7 +235,6 @@ class ClassLoader
     /**
      * Can be used to check if the autoloader uses the include path to check
      * for classes.
-     *
      * @return bool
      */
     public function getUseIncludePath()
@@ -253,7 +245,6 @@ class ClassLoader
     /**
      * Turns off searching the prefix and fallback directories for classes
      * that have not been registered with the class map.
-     *
      * @param bool $classMapAuthoritative
      */
     public function setClassMapAuthoritative($classMapAuthoritative)
@@ -263,7 +254,6 @@ class ClassLoader
 
     /**
      * Should class lookup fail if not found in the current class map?
-     *
      * @return bool
      */
     public function isClassMapAuthoritative()
@@ -273,7 +263,6 @@ class ClassLoader
 
     /**
      * Registers this instance as an autoloader.
-     *
      * @param bool $prepend Whether to prepend the autoloader or not
      */
     public function register($prepend = false)
@@ -291,7 +280,6 @@ class ClassLoader
 
     /**
      * Loads the given class or interface.
-     *
      * @param  string    $class The name of the class
      * @return bool|null True if loaded, null otherwise
      */
@@ -306,9 +294,7 @@ class ClassLoader
 
     /**
      * Finds the path to the file where the class is defined.
-     *
      * @param string $class The name of the class
-     *
      * @return string|false The path if found, false otherwise
      */
     public function findFile($class)

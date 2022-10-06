@@ -6,26 +6,21 @@
 namespace Astroanu\C3jsPHP;
 
 /**
- * Class Subchart
- * @package Astroanu\C3jsPHP
- *
  * Experimental
  */
-class Subchart implements \JsonSerializable
+final class Subchart implements \JsonSerializable
 {
     /**
-     * @var array
+     * @var mixed[][]|\Astroanu\C3jsPHP\Callback[]
      */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Show sub chart on the bottom of the chart
      *
-     * @param bool $visibility
-     *
      * @link http://c3js.org/reference.html#subchart-show
      */
-    public function setVisibility($visibility = false)
+    public function setVisibility(bool $visibility = false): void
     {
         $this->data['show'] = $visibility;
     }
@@ -33,11 +28,9 @@ class Subchart implements \JsonSerializable
     /**
      * Change the height of the subchart
      *
-     * @param int $height
-     *
      * @link http://c3js.org/reference.html#subchart-size-height
      */
-    public function setSizeHeight($height)
+    public function setSizeHeight(int $height): void
     {
         if (!isset($this->data['size'])) {
             $this->data['size'] = [];
@@ -48,20 +41,15 @@ class Subchart implements \JsonSerializable
 
     /**
      * Set callback for brush event
-     *
      * @param Callback $callback
-     *
      * @link http://c3js.org/reference.html#subchart-onbrush
      */
-    public function setOnBrush(Callback $callback)
+    public function setOnBrush(Callback $callback): void
     {
         $this->data['onbrush'] = $callback;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }

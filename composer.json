@@ -9,6 +9,13 @@
             "email": "astroanu2004@gmail.com"
         }
     ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "rector/rector": "0.14.x-dev"
+    },
     "autoload": {
         "psr-4": {
             "Astroanu\\C3jsPHP\\": "src/"

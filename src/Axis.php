@@ -5,55 +5,42 @@
 
 namespace Astroanu\C3jsPHP;
 
-/**
- * Class Axis
- * @package Astroanu\C3jsPHP
- */
-class Axis implements \JsonSerializable
+final class Axis implements \JsonSerializable
 {
-    const TYPE_TIMESERIES = 'timeseries';
-    const TYPE_CATEGORY = 'category';
-    const TYPE_INDEXED = 'indexed';
+    public const TYPE_TIMESERIES = 'timeseries';
+    public const TYPE_CATEGORY = 'category';
+    public const TYPE_INDEXED = 'indexed';
 
-    const POSITION_H_INNER_RIGHT = 'inner-right';
-    const POSITION_H_INNER_CENTER = 'inner-center';
-    const POSITION_H_INNER_LEFT = 'inner-left';
-    const POSITION_H_OUTER_RIGHT = 'outer-right';
-    const POSITION_H_OUTER_CENTER = 'outer-center';
-    const POSITION_H_OUTER_LEFT = 'outer-left';
+    public const POSITION_H_INNER_RIGHT = 'inner-right';
+    public const POSITION_H_INNER_CENTER = 'inner-center';
+    public const POSITION_H_INNER_LEFT = 'inner-left';
+    public const POSITION_H_OUTER_RIGHT = 'outer-right';
+    public const POSITION_H_OUTER_CENTER = 'outer-center';
+    public const POSITION_H_OUTER_LEFT = 'outer-left';
 
-    const POSITION_V_INNER_TOP = 'inner-top';
-    const POSITION_V_INNER_MIDDLE = 'inner-middle';
-    const POSITION_V_INNER_BOTTOM = 'inner-bottom';
-    const POSITION_V_OUTER_TOP = 'outer-top';
-    const POSITION_V_OUTER_MIDDLE = 'outer-middle';
-    const POSITION_V_OUTER_BOTTOM = 'outer-bottom';
+    public const POSITION_V_INNER_TOP = 'inner-top';
+    public const POSITION_V_INNER_MIDDLE = 'inner-middle';
+    public const POSITION_V_INNER_BOTTOM = 'inner-bottom';
+    public const POSITION_V_OUTER_TOP = 'outer-top';
+    public const POSITION_V_OUTER_MIDDLE = 'outer-middle';
+    public const POSITION_V_OUTER_BOTTOM = 'outer-bottom';
 
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Switch x and y axis position
-     *
-     * @param bool $rotated
-     *
      * @link http://c3js.org/reference.html#axis-rotated
      */
-    public function setRotated($rotated = false)
+    public function setRotated(bool $rotated = false): void
     {
         $this->data['rotated'] = $rotated;
     }
 
     /**
      * Show or hide x axis
-     *
-     * @param bool $visibility
-     *
      * @link http://c3js.org/reference.html#axis-x-show
      */
-    public function setXVisibility($visibility = false)
+    public function setXVisibility(bool $visibility = false): void
     {
         $this->ensureX();
         $this->data['x']['show'] = $visibility;
@@ -61,12 +48,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set type of x axis
-     *
-     * @param string $type
-     *
      * @link http://c3js.org/reference.html#axis-x-type
      */
-    public function setXType($type = self::TYPE_INDEXED)
+    public function setXType(string $type = self::TYPE_INDEXED): void
     {
         $this->ensureX();
         $this->data['x']['type'] = $type;
@@ -74,12 +58,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set how to treat the timezone of x values
-     *
-     * @param bool $localtime
-     *
      * @link http://c3js.org/reference.html#axis-x-localtime
      */
-    public function setXLocaltime($localtime = true)
+    public function setXLocaltime(bool $localtime = true): void
     {
         $this->ensureX();
         $this->data['x']['localtime'] = $localtime;
@@ -87,12 +68,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set category names on category axis
-     *
-     * @param array $categories
-     *
      * @link http://c3js.org/reference.html#axis-x-categories
+     * @param mixed[] $categories
      */
-    public function setXCategories($categories)
+    public function setXCategories(array $categories): void
     {
         $this->ensureX();
         $this->data['x']['categories'] = $categories;
@@ -100,12 +79,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Centerise ticks on category axis.
-     *
-     * @param bool $centered
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-centered
      */
-    public function setXTickCentered($centered = false)
+    public function setXTickCentered(bool $centered = false): void
     {
         $this->ensureXTick();
         $this->data['x']['tick']['centered'] = $centered;
@@ -113,12 +89,10 @@ class Axis implements \JsonSerializable
 
     /**
      * A function to format tick value
-     *
      * @param string $format d3.format
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-format
      */
-    public function setXTickFormat($format)
+    public function setXTickFormat(string $format): void
     {
         $this->ensureXTick();
         $this->data['x']['tick']['format'] = $format;
@@ -126,12 +100,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Setting for culling ticks
-     *
-     * @param bool $culling
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-culling
      */
-    public function setXTickCulling($culling)
+    public function setXTickCulling(bool $culling): void
     {
         $this->ensureXTick();
         $this->data['x']['tick']['culling'] = $culling;
@@ -140,12 +111,9 @@ class Axis implements \JsonSerializable
 
     /**
      * The number of tick texts will be adjusted to less than this value
-     *
-     * @param int $max
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-culling-max
      */
-    public function setXTickCullingMax($max = 10)
+    public function setXTickCullingMax(int $max = 10): void
     {
         $this->ensureXTick();
 
@@ -158,12 +126,9 @@ class Axis implements \JsonSerializable
 
     /**
      * The number of x axis ticks to show
-     *
-     * @param int $count
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-count
      */
-    public function setXTickCount($count)
+    public function setXTickCount(int $count): void
     {
         $this->ensureXTick();
         $this->data['x']['tick']['count'] = $count;
@@ -171,12 +136,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Fit x axis ticks
-     *
-     * @param bool $fit
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-fit
      */
-    public function setXTickFit($fit = true)
+    public function setXTickFit(bool $fit = true): void
     {
         $this->ensureXTick();
         $this->data['x']['tick']['fit'] = $fit;
@@ -184,12 +146,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set the x values of ticks manually
-     *
-     * @param array $values
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-values
+     * @param mixed[] $values
      */
-    public function setXTickValues($values)
+    public function setXTickValues(array $values): void
     {
         $this->ensureXTick();
         $this->data['x']['tick']['values'] = $values;
@@ -197,12 +157,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Rotate x axis tick text
-     *
-     * @param int $angle
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-rotate
      */
-    public function setXTickRotate($angle = 0)
+    public function setXTickRotate(int $angle = 0): void
     {
         $this->ensureXTick();
         $this->data['x']['tick']['rotate'] = $angle;
@@ -210,12 +167,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Show x axis outer tick
-     *
-     * @param bool $outer
-     *
      * @link http://c3js.org/reference.html#axis-x-tick-outer
      */
-    public function setXTickOuter($outer = true)
+    public function setXTickOuter(bool $outer = true): void
     {
         $this->ensureXTick();
         $this->data['x']['tick']['outer'] = $outer;
@@ -223,12 +177,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set max value of x axis range
-     *
-     * @param int $max
-     *
      * @link http://c3js.org/reference.html#axis-x-max
      */
-    public function setXMax($max)
+    public function setXMax(int $max): void
     {
         $this->ensureX();
         $this->data['x']['max'] = $max;
@@ -236,12 +187,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set min value of x axis range
-     *
-     * @param int $min
-     *
      * @link http://c3js.org/reference.html#axis-x-min
      */
-    public function setXMin($min)
+    public function setXMin(int $min): void
     {
         $this->ensureX();
         $this->data['x']['min'] = $min;
@@ -249,14 +197,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set left padding for x axis
-     *
-     * @param int $left
-     *
      * @link http://c3js.org/reference.html#axis-x-padding
-     *
      * @see setXPaddingRight()
      */
-    public function setXPaddingLeft($left)
+    public function setXPaddingLeft(int $left): void
     {
         $this->ensureXPadding();
         $this->data['x']['padding']['left'] = $left;
@@ -264,14 +208,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set right padding for x axis
-     *
-     * @param int $right
-     *
      * @link http://c3js.org/reference.html#axis-x-padding
-     *
      * @see setXPaddingLeft()
      */
-    public function setXPaddingRight($right)
+    public function setXPaddingRight(int $right): void
     {
         $this->ensureXPadding();
         $this->data['x']['padding']['right'] = $right;
@@ -279,12 +219,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set height of x axis
-     *
      * @param int $height Height in pixel
-     *
      * @link http://c3js.org/reference.html#axis-x-height
      */
-    public function setXHeight($height)
+    public function setXHeight(int $height): void
     {
         $this->ensureX();
         $this->data['x']['height'] = $height;
@@ -292,12 +230,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set default extent for subchart and zoom
-     *
-     * @param array $extent
-     *
      * @link http://c3js.org/reference.html#axis-x-extent
+     * @param mixed[] $extent
      */
-    public function setXExtent($extent)
+    public function setXExtent(array $extent): void
     {
         $this->ensureX();
         $this->data['x']['extent'] = $extent;
@@ -305,14 +241,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set label text on x axis
-     *
-     * @param string $text
-     *
      * @link http://c3js.org/reference.html#axis-x-label
-     *
      * @see setXLabelPosition()
      */
-    public function setXLabelText($text)
+    public function setXLabelText(string $text): void
     {
         $this->ensureXLabel();
         $this->data['x']['label']['text'] = $text;
@@ -320,14 +252,11 @@ class Axis implements \JsonSerializable
 
     /**
      * Set label text position on x axis
-     *
      * @param POSITION_H_INNER_RIGHT|POSITION_H_INNER_CENTER|POSITION_H_INNER_LEFT|POSITION_H_OUTER_RIGHT|POSITION_H_OUTER_CENTER|POSITION_H_OUTER_LEFT|POSITION_V_INNER_TOP|POSITION_V_INNER_MIDDLE|POSITION_V_INNER_BOTTOM|POSITION_V_OUTER_TOP|POSITION_V_OUTER_MIDDLE|POSITION_V_OUTER_BOTTOM $const
-     *
      * @link http://c3js.org/reference.html#axis-x-label
-     *
      * @see setXLabelText()
      */
-    public function setXLabelPosition($const)
+    public function setXLabelPosition($const): void
     {
         $this->ensureXLabel();
         $this->data['x']['label']['position'] = $const;
@@ -335,12 +264,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Show or hide y axis
-     *
-     * @param bool $visibility
-     *
      * @link http://c3js.org/reference.html#axis-y-show
      */
-    public function setYVisibility($visibility = true)
+    public function setYVisibility(bool $visibility = true): void
     {
         $this->ensureY();
         $this->data['y']['show'] = $visibility;
@@ -348,12 +274,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Show y axis inside of the chart
-     *
-     * @param bool $inner
-     *
      * @link http://c3js.org/reference.html#axis-y-inner
      */
-    public function setYInner($inner = false)
+    public function setYInner(bool $inner = false): void
     {
         $this->ensureY();
         $this->data['y']['inner'] = $inner;
@@ -361,12 +284,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set max value of y axis
-     *
-     * @param int $max
-     *
      * @link http://c3js.org/reference.html#axis-y-max
      */
-    public function setYMax($max)
+    public function setYMax(int $max): void
     {
         $this->ensureY();
         $this->data['y']['max'] = $max;
@@ -374,12 +294,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set min value of y axis
-     *
-     * @param int $min
-     *
      * @link http://c3js.org/reference.html#axis-y-min
      */
-    public function setYMin($min)
+    public function setYMin(int $min): void
     {
         $this->ensureY();
         $this->data['y']['min'] = $min;
@@ -387,12 +304,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Change the direction of y axis
-     *
-     * @param bool $inverted
-     *
      * @link http://c3js.org/reference.html#axis-y-inverted
      */
-    public function setYInverted($inverted = false)
+    public function setYInverted(bool $inverted = false): void
     {
         $this->ensureY();
         $this->data['y']['inverted'] = $inverted;
@@ -400,12 +314,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set center value of y axis
-     *
-     * @param int $center
-     *
      * @link http://c3js.org/reference.html#axis-y-center
      */
-    public function setYCenter($center)
+    public function setYCenter(int $center): void
     {
         $this->ensureY();
         $this->data['y']['center'] = $center;
@@ -413,14 +324,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set label on y axis
-     *
-     * @param string $text
-     *
      * @link http://c3js.org/reference.html#axis-y-label
-     *
      * @see setYLabelPosition()
      */
-    public function setYLabelText($text)
+    public function setYLabelText(string $text): void
     {
         $this->ensureYLabel();
         $this->data['y']['label']['text'] = $text;
@@ -428,14 +335,11 @@ class Axis implements \JsonSerializable
 
     /**
      * Set label position on y axis
-     *
      * @param POSITION_H_INNER_RIGHT|POSITION_H_INNER_CENTER|POSITION_H_INNER_LEFT|POSITION_H_OUTER_RIGHT|POSITION_H_OUTER_CENTER|POSITION_H_OUTER_LEFT|POSITION_V_INNER_TOP|POSITION_V_INNER_MIDDLE|POSITION_V_INNER_BOTTOM|POSITION_V_OUTER_TOP|POSITION_V_OUTER_MIDDLE|POSITION_V_OUTER_BOTTOM $const
-     *
      * @link http://c3js.org/reference.html#axis-y-label
-     *
      * @see setYLabelText()
      */
-    public function setYLabelPosition($const)
+    public function setYLabelPosition($const): void
     {
         $this->ensureYLabel();
         $this->data['y']['label']['position'] = $const;
@@ -443,12 +347,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set formatter for y axis tick text
-     *
      * @param string $format d3.format
-     *
      * @link http://c3js.org/reference.html#axis-y-tick-format
      */
-    public function setYTickFormat($format)
+    public function setYTickFormat(string $format): void
     {
         $this->ensureYTick();
         $this->data['y']['tick']['format'] = $format;
@@ -456,12 +358,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Show or hide outer tick
-     *
-     * @param $outer
-     *
      * @link http://c3js.org/reference.html#axis-y-tick-outer
      */
-    public function setYTickOuter($outer)
+    public function setYTickOuter($outer): void
     {
         $this->ensureYTick();
         $this->data['y']['tick']['outer'] = $outer;
@@ -469,12 +368,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set y axis tick values manually
-     *
-     * @param array $values
-     *
      * @link http://c3js.org/reference.html#axis-y-tick-values
+     * @param mixed[] $values
      */
-    public function setYTickValues($values)
+    public function setYTickValues(array $values): void
     {
         $this->ensureYTick();
         $this->data['y']['tick']['values'] = $values;
@@ -482,12 +379,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set the number of y axis ticks
-     *
-     * @param int $count
-     *
      * @link http://c3js.org/reference.html#axis-y-tick-count
      */
-    public function setYTickCount($count)
+    public function setYTickCount(int $count): void
     {
         $this->ensureYTick();
         $this->data['y']['tick']['count'] = $count;
@@ -495,14 +389,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set top padding for y axis
-     *
-     * @param int $top
-     *
      * http://c3js.org/reference.html#axis-y-padding
-     *
      * @see setYPaddingBottom()
      */
-    public function setYPaddingTop($top)
+    public function setYPaddingTop(int $top): void
     {
         $this->ensureYPadding();
         $this->data['y']['padding']['top'] = $top;
@@ -510,14 +400,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set bottom padding for y axis
-     *
-     * @param int $bottom
-     *
      * http://c3js.org/reference.html#axis-y-padding
-     *
      * @see setYPaddingTop()
      */
-    public function setYPaddingBottom($bottom)
+    public function setYPaddingBottom(int $bottom): void
     {
         $this->ensureYPadding();
         $this->data['y']['padding']['bottom'] = $bottom;
@@ -525,12 +411,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set default range of y axis
-     *
-     * @param array $range
-     *
      * @link http://c3js.org/reference.html#axis-y-default
+     * @param mixed[] $range
      */
-    public function setYDefault($range)
+    public function setYDefault(array $range): void
     {
         $this->ensureY();
         $this->data['y']['default'] = $range;
@@ -538,12 +422,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Show or hide y2 axis
-     *
-     * @param bool $visibility
-     *
      * @link http://c3js.org/reference.html#axis-y2-show
      */
-    public function setY2Visibility($visibility = false)
+    public function setY2Visibility(bool $visibility = false): void
     {
         $this->ensureY2();
         $this->data['y2']['show'] = $visibility;
@@ -551,12 +432,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Show y2 axis inside of the chart
-     *
-     * @param bool $inner
-     *
      * @link http://c3js.org/reference.html#axis-y2-inner
      */
-    public function setY2Inner($inner = false)
+    public function setY2Inner(bool $inner = false): void
     {
         $this->ensureY2();
         $this->data['y2']['inner'] = $inner;
@@ -564,12 +442,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set max value of y2 axis
-     *
-     * @param int $max
-     *
      * @link http://c3js.org/reference.html#axis-y2-max
      */
-    public function setY2Max($max)
+    public function setY2Max(int $max): void
     {
         $this->ensureY2();
         $this->data['y2']['max'] = $max;
@@ -577,12 +452,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set min value of y2 axis
-     *
-     * @param int $min
-     *
      * @link http://c3js.org/reference.html#axis-y2-min
      */
-    public function setY2Min($min)
+    public function setY2Min(int $min): void
     {
         $this->ensureY2();
         $this->data['y2']['min'] = $min;
@@ -590,12 +462,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Change the direction of y2 axis
-     *
-     * @param bool $inverted
-     *
      * @link http://c3js.org/reference.html#axis-y2-inverted
      */
-    public function setY2Inverted($inverted = false)
+    public function setY2Inverted(bool $inverted = false): void
     {
         $this->ensureY2();
         $this->data['y2']['inverted'] = $inverted;
@@ -603,12 +472,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set center value of y2 axis
-     *
-     * @param int $center
-     *
      * @link http://c3js.org/reference.html#axis-y2-center
      */
-    public function setY2Center($center)
+    public function setY2Center(int $center): void
     {
         $this->ensureY2();
         $this->data['y2']['center'] = $center;
@@ -616,14 +482,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set label on y2 axis
-     *
-     * @param string $text
-     *
      * @link http://c3js.org/reference.html#axis-y2-label
-     *
      * @see setY2LabelPosition()
      */
-    public function setY2LabelText($text)
+    public function setY2LabelText(string $text): void
     {
         $this->ensureY2Label();
         $this->data['y2']['label']['text'] = $text;
@@ -631,14 +493,11 @@ class Axis implements \JsonSerializable
 
     /**
      * Set label position on y2 axis
-     *
      * @param POSITION_H_INNER_RIGHT|POSITION_H_INNER_CENTER|POSITION_H_INNER_LEFT|POSITION_H_OUTER_RIGHT|POSITION_H_OUTER_CENTER|POSITION_H_OUTER_LEFT|POSITION_V_INNER_TOP|POSITION_V_INNER_MIDDLE|POSITION_V_INNER_BOTTOM|POSITION_V_OUTER_TOP|POSITION_V_OUTER_MIDDLE|POSITION_V_OUTER_BOTTOM $const
-     *
      * @link http://c3js.org/reference.html#axis-y2-label
-     *
      * @see setY2LabelText()
      */
-    public function setY2LabelPosition($const)
+    public function setY2LabelPosition($const): void
     {
         $this->ensureY2Label();
         $this->data['y2']['label']['position'] = $const;
@@ -646,12 +505,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set formatter for y2 axis tick text
-     *
      * @param string $format d3.format
-     *
      * @link http://c3js.org/reference.html#axis-y2-tick-format
      */
-    public function setY2TickFormat($format)
+    public function setY2TickFormat(string $format): void
     {
         $this->ensureY2Tick();
         $this->data['y2']['tick']['format'] = $format;
@@ -659,12 +516,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Show or hide outer tick
-     *
      * @param $outer
-     *
      * @link http://c3js.org/reference.html#axis-y2-tick-outer
      */
-    public function setY2TickOuter($outer)
+    public function setY2TickOuter($outer): void
     {
         $this->ensureY2Tick();
         $this->data['y2']['tick']['outer'] = $outer;
@@ -672,12 +527,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set y2 axis tick values manually
-     *
-     * @param array $values
-     *
      * @link http://c3js.org/reference.html#axis-y2-tick-values
+     * @param mixed[] $values
      */
-    public function setY2TickValues($values)
+    public function setY2TickValues(array $values): void
     {
         $this->ensureY2Tick();
         $this->data['y2']['tick']['values'] = $values;
@@ -685,12 +538,9 @@ class Axis implements \JsonSerializable
 
     /**
      * Set the number of y2 axis ticks
-     *
-     * @param int $count
-     *
      * @link http://c3js.org/reference.html#axis-y2-tick-count
      */
-    public function setY2TickCount($count)
+    public function setY2TickCount(int $count): void
     {
         $this->ensureY2Tick();
         $this->data['y2']['tick']['count'] = $count;
@@ -698,14 +548,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set top padding for y2 axis
-     *
-     * @param int $top
-     *
      * http://c3js.org/reference.html#axis-y2-padding
-     *
      * @see setY2PaddingBottom()
      */
-    public function setY2PaddingTop($top)
+    public function setY2PaddingTop(int $top): void
     {
         $this->ensureY2Padding();
         $this->data['y2']['padding']['top'] = $top;
@@ -713,14 +559,11 @@ class Axis implements \JsonSerializable
 
     /**
      * Set bottom padding for y2 axis
-     *
      * @param int $bottom
-     *
      * http://c3js.org/reference.html#axis-y2-padding
-     *
      * @see setY2PaddingTop()
      */
-    public function setY2PaddingBottom($bottom)
+    public function setY2PaddingBottom(int $bottom): void
     {
         $this->ensureY2Padding();
         $this->data['y2']['padding']['bottom'] = $bottom;
@@ -728,12 +571,10 @@ class Axis implements \JsonSerializable
 
     /**
      * Set default range of y2 axis
-     *
-     * @param array $range
-     *
      * @link http://c3js.org/reference.html#axis-y2-default
+     * @param mixed[] $range
      */
-    public function setY2Default($range)
+    public function setY2Default(array $range): void
     {
         $this->ensureY2();
         $this->data['y2']['default'] = $range;
@@ -741,10 +582,9 @@ class Axis implements \JsonSerializable
 
     /**
      * @param $fit
-     *
      * @fixme Undocumented. Is this really working?
      */
-    public function setYTickFit($fit)
+    public function setYTickFit($fit): void
     {
         $this->ensureYTick();
         $this->data['y']['tick']['fit'] = $fit;
@@ -752,31 +592,27 @@ class Axis implements \JsonSerializable
 
     /**
      * @param $angle
-     *
      * @fixme Undocumented. Is this really working?
      */
-    public function setYTickRotate($angle)
+    public function setYTickRotate($angle): void
     {
         $this->ensureYTick();
         $this->data['y']['tick']['rotate'] = $angle;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }
 
-    private function ensureX()
+    private function ensureX(): void
     {
         if (!isset($this->data['x'])) {
             $this->data['x'] = [];
         }
     }
 
-    private function ensureXLabel()
+    private function ensureXLabel(): void
     {
         $this->ensureX();
 
@@ -785,7 +621,7 @@ class Axis implements \JsonSerializable
         }
     }
 
-    private function ensureXPadding()
+    private function ensureXPadding(): void
     {
         $this->ensureX();
 
@@ -794,7 +630,7 @@ class Axis implements \JsonSerializable
         }
     }
 
-    private function ensureXTick()
+    private function ensureXTick(): void
     {
         $this->ensureX();
 
@@ -803,14 +639,14 @@ class Axis implements \JsonSerializable
         }
     }
 
-    private function ensureY()
+    private function ensureY(): void
     {
         if (!isset($this->data['y'])) {
             $this->data['y'] = [];
         }
     }
 
-    private function ensureYLabel()
+    private function ensureYLabel(): void
     {
         $this->ensureY();
 
@@ -819,7 +655,7 @@ class Axis implements \JsonSerializable
         }
     }
 
-    private function ensureYTick()
+    private function ensureYTick(): void
     {
         $this->ensureY();
 
@@ -828,7 +664,7 @@ class Axis implements \JsonSerializable
         }
     }
 
-    private function ensureYPadding()
+    private function ensureYPadding(): void
     {
         $this->ensureY();
 
@@ -837,14 +673,14 @@ class Axis implements \JsonSerializable
         }
     }
 
-    private function ensureY2()
+    private function ensureY2(): void
     {
         if (!isset($this->data['y2'])) {
             $this->data['y2'] = [];
         }
     }
 
-    private function ensureY2Label()
+    private function ensureY2Label(): void
     {
         $this->ensureY2();
 
@@ -853,7 +689,7 @@ class Axis implements \JsonSerializable
         }
     }
 
-    private function ensureY2Tick()
+    private function ensureY2Tick(): void
     {
         $this->ensureY2();
 
@@ -862,7 +698,7 @@ class Axis implements \JsonSerializable
         }
     }
 
-    private function ensureY2Padding()
+    private function ensureY2Padding(): void
     {
         $this->ensureY2();
 

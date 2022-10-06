@@ -6,60 +6,42 @@
 namespace Astroanu\C3jsPHP;
 
 /**
- * Class Region
- * @package Astroanu\C3jsPHP
- *
  * Show rectangles inside the chart
  *
  * @link http://c3js.org/reference.html#regions
  */
-class Region implements \JsonSerializable
+final class Region implements \JsonSerializable
 {
-    const AXIS_X = 'x';
-    const AXIS_Y = 'y';
-    const AXIS_Y2 = 'y2';
+    public const AXIS_X = 'x';
+    public const AXIS_Y = 'y';
+    public const AXIS_Y2 = 'y2';
 
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * @param AXIS_X|AXIS_Y|AXIS_Y2 $axis
      */
-    public function setAxis($axis)
+    public function setAxis($axis): void
     {
         $this->data['axis'] = $axis;
     }
 
-    /**
-     * @param int $x
-     */
-    public function setX($x)
+    public function setX(int $x): void
     {
         $this->data['x'] = $x;
     }
 
-    /**
-     * @param int $y
-     */
-    public function setY($y)
+    public function setY(int $y): void
     {
         $this->data['y'] = $y;
     }
 
-    /**
-     * @param string $class
-     */
-    public function setClass($class)
+    public function setClass(string $class): void
     {
         $this->data['class'] = $class;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }

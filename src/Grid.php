@@ -5,27 +5,15 @@
 
 namespace Astroanu\C3jsPHP;
 
-/**
- * Class Grid
- * @package Astroanu\C3jsPHP
- */
-class Grid implements \JsonSerializable
+final class Grid implements \JsonSerializable
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Show grids along x axis
-     *
-     * @param boolean $visibility
-     *
-     * @return Grid
-     *
      * @link http://c3js.org/reference.html#grid-x-show
      */
-    public function setXVisibility($visibility = false)
+    public function setXVisibility(bool $visibility = false): void
     {
         $this->ensureX();
         $this->data['x']['show'] = $visibility;
@@ -33,14 +21,10 @@ class Grid implements \JsonSerializable
 
     /**
      * Set additional grid lines along x axis
-     *
-     * @param array $lines
-     *
-     * @return Grid
-     *
      * @link http://c3js.org/reference.html#grid-x-lines
+     * @param mixed[] $lines
      */
-    public function setXLines($lines)
+    public function setXLines(array $lines): void
     {
         $this->ensureX();
         $this->data['x']['lines'] = $lines;
@@ -48,14 +32,9 @@ class Grid implements \JsonSerializable
 
     /**
      * Show grids along y axis
-     *
-     * @param boolean $visibility
-     *
-     * @return Grid
-     *
      * @link http://c3js.org/reference.html#grid-y-show
      */
-    public function setYVisibility($visibility = false)
+    public function setYVisibility(bool $visibility = false): void
     {
         $this->ensureY();
         $this->data['y']['show'] = $visibility;
@@ -63,14 +42,10 @@ class Grid implements \JsonSerializable
 
     /**
      * Set additional grid lines along y axis
-     *
-     * @param array $lines
-     *
-     * @return Grid
-     *
      * @link http://c3js.org/reference.html#grid-y-lines
+     * @param mixed[] $lines
      */
-    public function setYLines($lines)
+    public function setYLines(array $lines): void
     {
         $this->ensureY();
 
@@ -78,21 +53,21 @@ class Grid implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }
 
-    private function ensureX()
+    private function ensureX(): void
     {
         if (!isset($this->data['x'])) {
             $this->data['x'] = [];
         }
     }
 
-    private function ensureY()
+    private function ensureY(): void
     {
         if (!isset($this->data['y'])) {
             $this->data['y'] = [];

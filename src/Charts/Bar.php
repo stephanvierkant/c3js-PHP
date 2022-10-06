@@ -5,57 +5,38 @@
 
 namespace Astroanu\C3jsPHP\Charts;
 
-/**
- * Class Bar
- * @package Astroanu\C3jsPHP\Charts
- */
-class Bar implements \JsonSerializable
+final class Bar implements \JsonSerializable
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Change the width of bar chart
-     *
-     * @param int $width
-     *
      * @link http://c3js.org/reference.html#bar-width
      */
-    public function setWidth($width)
+    public function setWidth(int $width): void
     {
         $this->data['width'] = $width;
     }
 
     /**
      * Change the width of bar chart by ratio
-     *
-     * @param float $ratio
-     *
      * @link http://c3js.org/reference.html#bar-width-ratio
      */
-    public function setWidthRatio($ratio)
+    public function setWidthRatio(float $ratio): void
     {
         $this->data['ratio'] = $ratio;
     }
 
     /**
      * Set if min or max value will be 0 on bar chart
-     *
-     * @param bool $zerobased
-     *
      * @link http://c3js.org/reference.html#bar-zerobased
      */
-    public function setZerobased($zerobased = true)
+    public function setZerobased(bool $zerobased = true): void
     {
         $this->data['zerobased'] = $zerobased;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }

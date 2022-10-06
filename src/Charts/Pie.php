@@ -5,25 +5,16 @@
 
 namespace Astroanu\C3jsPHP\Charts;
 
-/**
- * Class Pie
- * @package Astroanu\C3jsPHP\Charts
- */
-class Pie implements \JsonSerializable
+final class Pie implements \JsonSerializable
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Show or hide label on each pie piece
-     *
      * @param $visibility
-     *
      * @link http://c3js.org/reference.html#pie-label-show
      */
-    public function setLabelVisibility($visibility = true)
+    public function setLabelVisibility($visibility = true): void
     {
         $this->ensureLabel();
         $this->data['label']['show'] = $visibility;
@@ -32,11 +23,9 @@ class Pie implements \JsonSerializable
     /**
      * Set formatter for the label on each pie piece
      *
-     * @param string $format
-     *
      * @link http://c3js.org/reference.html#pie-label-format
      */
-    public function setLabelFormat($format)
+    public function setLabelFormat(string $format): void
     {
         $this->ensureLabel();
         $this->data['label']['format'] = $format;
@@ -46,11 +35,9 @@ class Pie implements \JsonSerializable
     /**
      * Set threshold to show/hide labels
      *
-     * @param float $threshold
-     *
      * @link http://c3js.org/reference.html#pie-label-threshold
      */
-    public function setLabeltThreshold($threshold = 0.05)
+    public function setLabeltThreshold(float $threshold = 0.05): void
     {
         $this->ensureLabel();
         $this->data['label']['threshold'] = $threshold;
@@ -59,24 +46,19 @@ class Pie implements \JsonSerializable
     /**
      * Enable or disable expanding pie pieces
      *
-     * @param bool $expand
-     *
      * @link http://c3js.org/reference.html#pie-expand
      */
-    public function setExpand($expand = true)
+    public function setExpand(bool $expand = true): void
     {
         $this->data['expand'] = $expand;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }
 
-    private function ensureLabel()
+    private function ensureLabel(): void
     {
         if (!isset($this->data['label'])) {
             $this->data['label'] = [];

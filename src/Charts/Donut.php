@@ -5,25 +5,16 @@
 
 namespace Astroanu\C3jsPHP\Charts;
 
-/**
- * Class Donut
- * @package Astroanu\C3jsPHP\Charts
- */
-class Donut implements \JsonSerializable
+final class Donut implements \JsonSerializable
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Show or hide label on each donut piece
-     *
      * @param $visibility
-     *
      * @link http://c3js.org/reference.html#donut-label-show
      */
-    public function setLabelVisibility($visibility = true)
+    public function setLabelVisibility($visibility = true): void
     {
         $this->ensureLabel();
         $this->data['label']['show'] = $visibility;
@@ -32,11 +23,9 @@ class Donut implements \JsonSerializable
     /**
      * Set formatter for the label on each donut piece
      *
-     * @param string $format
-     *
      * @link http://c3js.org/reference.html#donut-label-format
      */
-    public function setLabelFormat($format)
+    public function setLabelFormat(string $format): void
     {
         $this->ensureLabel();
         $this->data['label']['format'] = $format;
@@ -45,11 +34,9 @@ class Donut implements \JsonSerializable
     /**
      * Set threshold to show/hide labels
      *
-     * @param float $threshold
-     *
      * @link http://c3js.org/reference.html#donut-label-threshold
      */
-    public function setLabelThreshold($threshold = 0.05)
+    public function setLabelThreshold(float $threshold = 0.05): void
     {
         $this->ensureLabel();
         $this->data['label']['threshold'] = $threshold;
@@ -58,11 +45,9 @@ class Donut implements \JsonSerializable
     /**
      * Enable or disable expanding donut pieces
      *
-     * @param bool $expand
-     *
      * @link http://c3js.org/reference.html#donut-expand
      */
-    public function setExpand($expand = true)
+    public function setExpand(bool $expand = true): void
     {
         $this->data['expand'] = $expand;
     }
@@ -70,11 +55,9 @@ class Donut implements \JsonSerializable
     /**
      * Set width of donut chart
      *
-     * @param int $width
-     *
      * @link http://c3js.org/reference.html#donut-width
      */
-    public function setWidth($width)
+    public function setWidth(int $width): void
     {
         $this->data['width'] = $width;
     }
@@ -82,24 +65,19 @@ class Donut implements \JsonSerializable
     /**
      * Set title of donut chart
      *
-     * @param string $title
-     *
      * @link http://c3js.org/reference.html#donut-title
      */
-    public function setTitle($title = '')
+    public function setTitle(string $title = ''): void
     {
         $this->data['title'] = $title;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }
 
-    private function ensureLabel()
+    private function ensureLabel(): void
     {
         if (!isset($this->data['label'])) {
             $this->data['label'] = [];

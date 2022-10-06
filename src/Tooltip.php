@@ -5,49 +5,33 @@
 
 namespace Astroanu\C3jsPHP;
 
-/**
- * Class Tooltip
- * @package Astroanu\C3jsPHP
- */
-class Tooltip implements \JsonSerializable
+final class Tooltip implements \JsonSerializable
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Show or hide tooltip
-     *
-     * @param bool $visibility
-     *
      * @link http://c3js.org/reference.html#tooltip-show
      */
-    public function setVisibility($visibility = true)
+    public function setVisibility(bool $visibility = true): void
     {
         $this->data['show'] = $visibility;
     }
 
     /**
      * Set if tooltip is grouped or not for the data points
-     *
-     * @param bool $grouped
-     *
      * @link http://c3js.org/reference.html#tooltip-grouped
      */
-    public function setGrouped($grouped = true)
+    public function setGrouped(bool $grouped = true): void
     {
         $this->data['grouped'] = $grouped;
     }
 
     /**
      * Set format for the title of tooltip
-     *
-     * @param string $title
-     *
      * @link http://c3js.org/reference.html#tooltip-format-title
      */
-    public function setFormatTitle($title)
+    public function setFormatTitle(string $title): void
     {
         $this->ensureFormat();
         $this->data['format']['title'] = $title;
@@ -55,12 +39,9 @@ class Tooltip implements \JsonSerializable
 
     /**
      * Set format for the name of each data in tooltip
-     *
-     * @param string $name
-     *
      * @link http://c3js.org/reference.html#tooltip-format-name
      */
-    public function setFormatName($name)
+    public function setFormatName(string $name): void
     {
         $this->ensureFormat();
         $this->data['format']['name'] = $name;
@@ -68,12 +49,9 @@ class Tooltip implements \JsonSerializable
 
     /**
      * Set format for the value of each data in tooltip
-     *
-     * @param string $value
-     *
      * @link http://c3js.org/reference.html#tooltip-format-value
      */
-    public function setFormatValue($value)
+    public function setFormatValue(string $value): void
     {
         $this->ensureFormat();
         $this->data['format']['value'] = $value;
@@ -81,37 +59,28 @@ class Tooltip implements \JsonSerializable
 
     /**
      * Set custom position for the tooltip
-     *
-     * @param string $position
-     *
      * @link http://c3js.org/reference.html#tooltip-position
      */
-    public function setPosition($position)
+    public function setPosition(string $position): void
     {
         $this->data['position'] = $position;
     }
 
     /**
      * Set custom HTML for the tooltip
-     *
-     * @param string $contents
-     *
      * @link http://c3js.org/reference.html#tooltip-contents
      */
-    public function setContents($contents)
+    public function setContents(string $contents): void
     {
         $this->data['contents'] = $contents;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }
 
-    private function ensureFormat()
+    private function ensureFormat(): void
     {
         if (!isset($this->data['format'])) {
             $this->data['format'] = [];

@@ -6,26 +6,18 @@
 namespace Astroanu\C3jsPHP;
 
 /**
- * Class Zoom
- * @package Astroanu\C3jsPHP
- *
  * Experimental
  */
-class Zoom implements \JsonSerializable
+final class Zoom implements \JsonSerializable
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Enable zooming
      *
-     * @param bool $enabled
-     *
      * @link http://c3js.org/reference.html#zoom-enabled
      */
-    public function setEnabled($enabled = false)
+    public function setEnabled(bool $enabled = false): void
     {
         $this->data['enabled'] = $enabled;
     }
@@ -33,11 +25,9 @@ class Zoom implements \JsonSerializable
     /**
      * Enable to rescale after zooming
      *
-     * @param bool $rescale
-     *
      * @link http://c3js.org/reference.html#zoom-rescale
      */
-    public function setRescale($rescale = false)
+    public function setRescale(bool $rescale = false): void
     {
         $this->data['rescale'] = $rescale;
     }
@@ -45,55 +35,45 @@ class Zoom implements \JsonSerializable
     /**
      * Change zoom extent
      *
-     * @param array $extent
-     *
      * @link http://c3js.org/reference.html#zoom-extent
+     * @param mixed[] $extent
      */
-    public function setExtent($extent = array(1, 10))
+    public function setExtent(array $extent = [1, 10]): void
     {
         $this->data['extent'] = $extent;
     }
 
     /**
      * Set callback that is called when the chart is zooming
-     *
      * @param Callback $callback
-     *
      * @link http://c3js.org/reference.html#zoom-onzoom
      */
-    public function setOnZoom(Callback $callback)
+    public function setOnZoom(Callback $callback): void
     {
         $this->data['onzoom'] = $callback;
     }
 
     /**
      * Set callback that is called when zooming starts
-     *
      * @param Callback $callback
-     *
      * @link http://c3js.org/reference.html#zoom-onzoomstart
      */
-    public function setOnZoomStart(Callback $callback)
+    public function setOnZoomStart(Callback $callback): void
     {
         $this->data['onzoomstart'] = $callback;
     }
 
     /**
      * Set callback that is called when zooming ends
-     *
      * @param Callback $callback
-     *
      * @link http://c3js.org/reference.html#zoom-onzoomend
      */
-    public function setOnZoomEnd(Callback $callback)
+    public function setOnZoomEnd(Callback $callback): void
     {
         $this->data['onzoomend'] = $callback;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }

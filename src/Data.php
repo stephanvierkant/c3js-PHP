@@ -5,46 +5,37 @@
 
 namespace Astroanu\C3jsPHP;
 
-/**
- * Class Data
- * @package Astroanu\C3jsPHP
- */
-class Data implements \JsonSerializable
+final class Data implements \JsonSerializable
 {
-    const MIMETYPE_JSON = 'json';
+    public const MIMETYPE_JSON = 'json';
 
-    const TYPE_LINE = 'line';
-    const TYPE_SPLINE = 'spline';
-    const TYPE_STEP = 'step';
-    const TYPE_AREA = 'area';
-    const TYPE_AREA_SPLINE = 'area-spline';
-    const TYPE_AREA_STEP = 'area-step';
-    const TYPE_BAR = 'bar';
-    const TYPE_SCATTER = 'scatter';
-    const TYPE_PIE = 'pie';
-    const TYPE_DONUT = 'donut';
-    const TYPE_GAUGE = 'gauge';
+    public const TYPE_LINE = 'line';
+    public const TYPE_SPLINE = 'spline';
+    public const TYPE_STEP = 'step';
+    public const TYPE_AREA = 'area';
+    public const TYPE_AREA_SPLINE = 'area-spline';
+    public const TYPE_AREA_STEP = 'area-step';
+    public const TYPE_BAR = 'bar';
+    public const TYPE_SCATTER = 'scatter';
+    public const TYPE_PIE = 'pie';
+    public const TYPE_DONUT = 'donut';
+    public const TYPE_GAUGE = 'gauge';
 
-    const ORDER_DESC = 'desc';
-    const ORDER_ASC = 'asc';
+    public const ORDER_DESC = 'desc';
+    public const ORDER_ASC = 'asc';
 
     /**
-     * @var array
+     * @var mixed[][]|\Astroanu\C3jsPHP\Callback[]
      */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Set chart data from a JSON or CSV file
      *
-     * @param string $url
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-url
-     *
      * @see setMimeType()
      */
-    public function setUrl($url)
+    public function setUrl(string $url): self
     {
         $this->data['url'] = $url;
         return $this;
@@ -53,13 +44,10 @@ class Data implements \JsonSerializable
     /**
      * Set chart data from JSON
      *
-     * @param array $data
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-json
+     * @param mixed[] $data
      */
-    public function setJson($data)
+    public function setJson(array $data): self
     {
         $this->data['json'] = $data;
         return $this;
@@ -68,13 +56,10 @@ class Data implements \JsonSerializable
     /**
      * Set chart data as rows
      *
-     * @param array $data
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-rows
+     * @param mixed[] $data
      */
-    public function setRows($data)
+    public function setRows(array $data): self
     {
         $this->data['rows'] = $data;
         return $this;
@@ -83,13 +68,10 @@ class Data implements \JsonSerializable
     /**
      * Set chart data as columns
      *
-     * @param array $data
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-columns
+     * @param mixed[] $data
      */
-    public function setColumns($data)
+    public function setColumns(array $data): self
     {
         $this->data['columns'] = $data;
         return $this;
@@ -97,16 +79,12 @@ class Data implements \JsonSerializable
 
     /**
      * Set data URL MIME type
-     *
      * @param string $mime Data URL mime type
      *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-mimeType
-     *
      * @see setUrl()
      */
-    public function setMimeType($mime = self::MIMETYPE_JSON)
+    public function setMimeType(string $mime = self::MIMETYPE_JSON): self
     {
         $this->data['mimeType'] = $mime;
         return $this;
@@ -115,13 +93,10 @@ class Data implements \JsonSerializable
     /**
      * Set which JSON object keys correspond to which data
      *
-     * @param array $fields
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-keys
+     * @param mixed[] $fields
      */
-    public function setKeysValue($fields)
+    public function setKeysValue(array $fields): self
     {
         $this->ensureKeys();
         $this->data['keys']['value'] = $fields;
@@ -131,13 +106,9 @@ class Data implements \JsonSerializable
     /**
      * Set keys for x axis when axis x is on category type
      *
-     * @param string $field
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-keys
      */
-    public function setKeysX($field)
+    public function setKeysX(string $field): self
     {
         $this->ensureKeys();
         $this->data['keys']['x'] = $field;
@@ -147,15 +118,10 @@ class Data implements \JsonSerializable
     /**
      * Set key of x values in data
      *
-     * @param string $x
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-x
-     *
      * @see setXs()
      */
-    public function setX($x)
+    public function setX(string $x): self
     {
         $this->data['x'] = $x;
         return $this;
@@ -164,15 +130,11 @@ class Data implements \JsonSerializable
     /**
      * Specify the keys of the x values for each data
      *
-     * @param array $xs
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-xs
-     *
      * @see setX()
+     * @param mixed[] $xs
      */
-    public function setXs($xs)
+    public function setXs(array $xs): self
     {
         $this->data['xs'] = $xs;
         return $this;
@@ -181,13 +143,9 @@ class Data implements \JsonSerializable
     /**
      * Set a format to parse string specifed as x
      *
-     * @param string $format
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-xFormat
      */
-    public function setXFormat($format = '%Y-%m-%d')
+    public function setXFormat(string $format = '%Y-%m-%d'): self
     {
         $this->data['xFormat'] = $format;
         return $this;
@@ -196,13 +154,10 @@ class Data implements \JsonSerializable
     /**
      * Set custom data name
      *
-     * @param array $names
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-names
+     * @param mixed[] $names
      */
-    public function setNames($names)
+    public function setNames(array $names): self
     {
         $this->data['names'] = $names;
         return $this;
@@ -211,13 +166,10 @@ class Data implements \JsonSerializable
     /**
      * Set custom data class
      *
-     * @param array $classes
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-classes
+     * @param mixed[] $classes
      */
-    public function setClasses($classes)
+    public function setClasses(array $classes): self
     {
         $this->data['classes'] = $classes;
         return $this;
@@ -226,13 +178,10 @@ class Data implements \JsonSerializable
     /**
      * Set groups for the data for stacking
      *
-     * @param array $groups
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-groups
+     * @param mixed[] $groups
      */
-    public function setGroups($groups)
+    public function setGroups(array $groups): self
     {
         $this->data['groups'] = $groups;
         return $this;
@@ -241,13 +190,10 @@ class Data implements \JsonSerializable
     /**
      * Set y axis the data related to. y and y2 can be used
      *
-     * @param array $axes
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-axes
+     * @param mixed[] $axes
      */
-    public function setAxes($axes)
+    public function setAxes(array $axes): self
     {
         $this->data['axes'] = $axes;
         return $this;
@@ -255,16 +201,12 @@ class Data implements \JsonSerializable
 
     /**
      * Set chart type at once
-     *
      * @param TYPE_LINE|TYPE_SPLINE|TYPE_STEP|TYPE_AREA|TYPE_AREA_SPLINE|TYPE_AREA_STEP|TYPE_BAR|TYPE_SCATTER|TYPE_PIE|TYPE_DONUT|TYPE_GAUGE $type
      *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-type
-     *
      * @see setTypes()
      */
-    public function setType($type = self::TYPE_LINE)
+    public function setType($type = self::TYPE_LINE): self
     {
         $this->data['type'] = $type;
         return $this;
@@ -273,15 +215,11 @@ class Data implements \JsonSerializable
     /**
      * Set chart type for each data
      *
-     * @param array $types
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-types
-     *
      * @see setType()
+     * @param mixed[] $types
      */
-    public function setTypes($types)
+    public function setTypes(array $types): self
     {
         $this->data['types'] = $types;
         return $this;
@@ -290,13 +228,9 @@ class Data implements \JsonSerializable
     /**
      * Show labels on each data points
      *
-     * @param bool $labels
-     *
-     * @return Data
-     *
      * @see http://c3js.org/reference.html#data-labels
      */
-    public function showLabels($labels = false)
+    public function showLabels(bool $labels = false): self
     {
         $this->data['labels'] = $labels;
         return $this;
@@ -305,13 +239,9 @@ class Data implements \JsonSerializable
     /**
      * Set formatter function for data labels
      *
-     * @param string $format
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-labels-format
      */
-    public function setLabelsFormat($format)
+    public function setLabelsFormat(string $format): self
     {
         if (!isset($this->data['labels'])) {
             $this->data['labels'] = [];
@@ -323,14 +253,11 @@ class Data implements \JsonSerializable
 
     /**
      * Define the order of the data
-     *
      * @param ORDER_DESC|ORDER_ASC|string|null $order
-     *
-     * @return Data
      *
      * @link http://c3js.org/reference.html#data-order
      */
-    public function setOrder($order = self::ORDER_DESC)
+    public function setOrder($order = self::ORDER_DESC): self
     {
         $this->data['order'] = $order;
         return $this;
@@ -339,13 +266,10 @@ class Data implements \JsonSerializable
     /**
      * Define regions for each data
      *
-     * @param array $regions
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-regions
+     * @param mixed[] $regions
      */
-    public function setRegions($regions)
+    public function setRegions(array $regions): self
     {
         $this->data['regions'] = $regions;
         return $this;
@@ -354,13 +278,9 @@ class Data implements \JsonSerializable
     /**
      * Set color converter function
      *
-     * @param string $color
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-color
      */
-    public function setColor($color)
+    public function setColor(string $color): self
     {
         $this->data['color'] = $color;
         return $this;
@@ -369,13 +289,10 @@ class Data implements \JsonSerializable
     /**
      * Set color for each data
      *
-     * @param array $colors
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-colors
+     * @param mixed[] $colors
      */
-    public function setColors($colors)
+    public function setColors(array $colors): self
     {
         $this->data['colors'] = $colors;
         return $this;
@@ -384,14 +301,11 @@ class Data implements \JsonSerializable
 
     /**
      * Hide each data when the chart appears
-     *
      * @param bool|array $hide
-     *
-     * @return Data
      *
      * @link http://c3js.org/reference.html#data-hide
      */
-    public function hide($hide = false)
+    public function hide($hide = false): self
     {
         $this->data['hide'] = $hide;
         return $this;
@@ -400,13 +314,9 @@ class Data implements \JsonSerializable
     /**
      * Set text displayed when empty data
      *
-     * @param string $text
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-empty-label-text
      */
-    public function setEmptyLabelText($text = '')
+    public function setEmptyLabelText(string $text = ''): self
     {
         if (!isset($this->data['empty'])) {
             $this->data['empty'] = [];
@@ -423,13 +333,9 @@ class Data implements \JsonSerializable
     /**
      * Set data selection enabled
      *
-     * @param bool $selection
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-selection-enabled
      */
-    public function enableSelection($selection = false)
+    public function enableSelection(bool $selection = false): self
     {
         $this->ensureSelection();
         $this->data['selection']['enabled'] = $selection;
@@ -439,13 +345,9 @@ class Data implements \JsonSerializable
     /**
      * Set grouped selection enabled
      *
-     * @param bool $grouped
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-selection-grouped
      */
-    public function enableGroupedSelection($grouped = false)
+    public function enableGroupedSelection(bool $grouped = false): self
     {
         $this->ensureSelection();
         $this->data['selection']['grouped'] = $grouped;
@@ -455,13 +357,9 @@ class Data implements \JsonSerializable
     /**
      * Set multiple data points selection enabled
      *
-     * @param bool $multiple
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-selection-multiple
      */
-    public function enableMultipleSelection($multiple = false)
+    public function enableMultipleSelection(bool $multiple = false): self
     {
         $this->ensureSelection();
         $this->data['selection']['multiple'] = $multiple;
@@ -471,13 +369,9 @@ class Data implements \JsonSerializable
     /**
      * Enable to select data points by dragging
      *
-     * @param bool $draggable
-     *
-     * @return Data
-     *
      * @link http://c3js.org/reference.html#data-selection-draggable
      */
-    public function enableDraggableSeletion($draggable = false)
+    public function enableDraggableSeletion(bool $draggable = false): self
     {
         $this->ensureSelection();
         $this->data['selection']['draggable'] = $draggable;
@@ -486,14 +380,11 @@ class Data implements \JsonSerializable
 
     /**
      * Set a callback for each data point to determine if it's selectable or not
-     *
      * @param Callback $callback
-     *
-     * @return Data
      *
      * @link http://c3js.org/reference.html#data-selection-isselectable
      */
-    public function setIsSelectable(Callback $callback)
+    public function setIsSelectable(Callback $callback): self
     {
         $this->ensureSelection();
         $this->data['selection']['isselectable'] = $callback;
@@ -502,14 +393,11 @@ class Data implements \JsonSerializable
 
     /**
      * Set a callback for click event on each data point
-     *
      * @param Callback $callback
-     *
-     * @return Data
      *
      * @link http://c3js.org/reference.html#data-onclick
      */
-    public function setOnClick(Callback $callback)
+    public function setOnClick(Callback $callback): self
     {
         $this->data['onclick'] = $callback;
         return $this;
@@ -517,14 +405,11 @@ class Data implements \JsonSerializable
 
     /**
      * Set a callback for mouseover event on each data point
-     *
      * @param Callback $callback
-     *
-     * @return Data
      *
      * @link http://c3js.org/reference.html#data-onmouseover
      */
-    public function setOnMouseOver(Callback $callback)
+    public function setOnMouseOver(Callback $callback): self
     {
         $this->data['onmouseover'] = $callback;
         return $this;
@@ -532,35 +417,29 @@ class Data implements \JsonSerializable
 
     /**
      * Set a callback for mouseout event on each data point
-     *
      * @param Callback $callback
-     *
-     * @return Data
      *
      * @link http://c3js.org/reference.html#data-onmouseout
      */
-    public function setOnMouseOut(Callback $callback)
+    public function setOnMouseOut(Callback $callback): self
     {
         $this->data['onmousout'] = $callback;
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }
 
-    private function ensureKeys()
+    private function ensureKeys(): void
     {
         if (!isset($this->data['keys'])) {
             $this->data['keys'] = [];
         }
     }
 
-    private function ensureSelection()
+    private function ensureSelection(): void
     {
         if (!isset($this->data['selection'])) {
             $this->data['selection'] = [];

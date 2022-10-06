@@ -5,29 +5,19 @@
 
 namespace Astroanu\C3jsPHP\Charts;
 
-/**
- * Class Gauge
- * @package Astroanu\C3jsPHP\Charts
- */
-class Gauge implements \JsonSerializable
+final class Gauge implements \JsonSerializable
 {
-    const TYPE_TIMESERIES = 'timeseries';
-    const TYPE_CATEGORY = 'category';
-    const TYPE_INDEXED = 'indexed';
+    public const TYPE_TIMESERIES = 'timeseries';
+    public const TYPE_CATEGORY = 'category';
+    public const TYPE_INDEXED = 'indexed';
 
-    /**
-     * @var array
-     */
-    protected $data = [];
+    private array $data = [];
 
     /**
      * Show or hide label on gauge
-     *
-     * @param bool $visibility
-     *
      * @link http://c3js.org/reference.html#gauge-label-show
      */
-    public function setLabelVisibility($visibility = true)
+    public function setLabelVisibility(bool $visibility = true): void
     {
        $this->ensureLabel();
         $this->data['label']['show'] = $visibility;
@@ -35,12 +25,9 @@ class Gauge implements \JsonSerializable
 
     /**
      * Set formatter for the label on gauge
-     *
-     * @param string $format
-     *
      * @link http://c3js.org/reference.html#gauge-label-format
      */
-    public function setLabelFormat($format)
+    public function setLabelFormat(string $format): void
     {
         $this->ensureLabel();
         $this->data['label']['format'] = $format;
@@ -49,72 +36,55 @@ class Gauge implements \JsonSerializable
 
     /**
      * Enable or disable expanding gauge
-     *
-     * @param bool $expand
-     *
      * @link http://c3js.org/reference.html#gauge-expand
      */
-    public function setExpand($expand = true)
+    public function setExpand(bool $expand = true): void
     {
         $this->data['expand'] = $expand;
     }
 
     /**
      * Set min value of the gauge
-     *
-     * @param int $min
-     *
      * @link http://c3js.org/reference.html#gauge-min
      */
-    public function setMin($min = 0)
+    public function setMin(int $min = 0): void
     {
         $this->data['min'] = $min;
     }
 
     /**
      * Set max value of the gauge
-     *
-     * @param int $max
-     *
      * @link http://c3js.org/reference.html#gauge-max
      */
-    public function setMax($max = 100)
+    public function setMax(int $max = 100): void
     {
         $this->data['max'] = $max;
     }
 
     /**
      * Set units of the gauge
-     *
-     * @param string $units
-     *
      * @link http://c3js.org/reference.html#gauge-units
      */
-    public function setUnits($units)
+    public function setUnits(string $units): void
     {
         $this->data['units'] = $units;
     }
 
     /**
      * Set width of gauge chart
-     * @param int $width
-     *
      * @link http://c3js.org/reference.html#gauge-width
      */
-    public function setWidth($width)
+    public function setWidth(int $width): void
     {
         $this->data['width'] = $width;
     }
 
-    /**
-     * @return array
-     */
-    public function JsonSerialize()
+    public function JsonSerialize(): array
     {
         return $this->data;
     }
 
-    private function ensureLabel()
+    private function ensureLabel(): void
     {
         if (!isset($this->data['label'])) {
             $this->data['label'] = [];
